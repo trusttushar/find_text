@@ -1,0 +1,85 @@
+<% include head.ejs %>
+<% include sidebar.ejs %>
+
+                <!-- Start Page content -->
+ <div class="content">
+    <div class="container-fluid">
+    
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card-box">
+                                        <h4 class="m-t-0 header-title">Search Text</h4>
+                                        <p class="text-muted m-b-30 font-14">
+                                            Please search the text in the file
+                                        </p>
+    
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="p-20">
+                                                        <div class="form-group row">
+                                                            <div class="col-10">
+                                                               <div class="row">
+                                                                 <div class="col-7">
+                                                                   <input type="text" id=<%= id %> class="form-control search_bar" placeholder="Enter Text to Search">
+                                                                 </div>
+                                                                 <div class="col-3">
+                                                                   <button type="button" id="btnsearch" class="btn btn-outline-primary waves-light waves-effect">search</button> 
+                                                                 </div>    
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                </div>
+                                            </div>
+    
+                                        </div>
+                                        <!-- end row -->
+    
+                                    </div> <!-- end card-box -->
+                                </div><!-- end col -->
+                            </div>
+
+                            <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="card-box">
+                                            <h2 id="result_heading">Search Results</h2>
+
+                            
+                                            <table class="table">
+                                                <thead class="thead-dark">
+                                                <tr>
+                                                    <th>Line Number</th>
+                                                    <th>Number Of Occurrence</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id=results>
+                                                <!-- <tr>
+
+                                                </tr> -->
+                                                </tbody>
+                                            </table>
+                                        </div>
+                            
+                                    </div>
+                                </div>
+                        
+                        
+    </div>
+</div>
+                
+                                                    
+<% include footer.ejs %>
+<script>
+    $("#btnsearch").click(function(){
+	if($('.search_bar').val()==""){
+		alert("You did not enter any value");
+		}else{
+	$.get("/search/text?text=" + $('.search_bar').val() + "&id=" + $('.search_bar').attr("id"), (data, status) => {
+
+        let results=data.map( val => `<tr><td>line number ${val.line_number}</td><td>${val.number_of_occurrence} times</td></tr>`);
+
+        document.getElementById('result_heading').innerHTML = `The Searched Text occurred in ${data.length} Number of Lines in Totle`;        
+        document.getElementById('results').innerHTML = results.toString().replace(/,/g,"");       
+	});
+}
+});
+</script>

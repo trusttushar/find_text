@@ -1,0 +1,14 @@
+As a part of this task you need to develop an API. The API will support uploading a file to server and reading the file to search for some content. You need to support:
+
+a. POST request: Upload a file to server. Max file size for uploaded file to be 5 MB. You will have to provide an interface of file upload.
+b. GET request: User will send a text with GET request. The text should be searched in the file uploaded and should return the line number where the text is found. If not found, should return 0.
+
+You are free to use any language you think is needed.
+
+You need to provide a build/deploy script, which will install all the dependencies and put the API up for consumption. We will just execute this script and everything should be deployed.
+
+Your solution will be judged on:
+1. How easy is the deployment.
+2. How well you handle the edge cases.
+3. How good your coding standards are. 
+
